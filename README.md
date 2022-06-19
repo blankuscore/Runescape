@@ -9,5 +9,9 @@ Most code samples focus on starting skills,
 - Greg Martinjak <greg.martinjak@gmail.com>
 ---
 
+## OSRS Login info:
+email: wehay77196@tagbert.com
+password: PsnmO91lgILDpqChvwee
+
 ## License & copyright
 None required or utilized
