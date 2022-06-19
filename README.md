@@ -1,0 +1,2 @@
+# Runescape
+Runescape botting repository
