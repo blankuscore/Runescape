@@ -63,7 +63,7 @@ def remove_inv(location): # removes a specific inventory item in a specific loca
     with pyautogui.hold('shift'):
         time.sleep(0.05); pyautogui.moveTo(rcoords[0], rcoords[1], 0.15)
         time.sleep(0.05); pyautogui.click(rcoords[0], rcoords[1])    
-    
+   
 def randcoords(coords_in): # randomize click locations
     coords_out = list(coords_in)
     coords_out[0] = coords_in[0] + randrange(-5,5,1)
@@ -110,8 +110,10 @@ def is_fishing():
     return True
 
 while(1):
+    time.sleep(0.5)
     if (inventory_count() > 24):
-        clear_inv(2,24)
+        #clear_inv(2,24)
+        break
     if (is_fishing() == False):
         coords = findshrimp()
         pyautogui.moveTo(coords[0]+20,coords[1]+20, 0.15)
