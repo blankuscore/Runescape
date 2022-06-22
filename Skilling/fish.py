@@ -70,7 +70,7 @@ def clear_inv(start,end): # clear a set of inventory items
 def is_fishing():
     pyautogui.screenshot('fishingstatus.png',region=(30,45,80,25))
     img = Image.open('fishingstatus.png')
-    print(pytesseract.image_to_string(img))
+    #print(pytesseract.image_to_string(img))
     if(pytesseract.image_to_string(img)[0:2] == "NO" or pytesseract.image_to_string(img)[0:2] == "" or pytesseract.image_to_string(img)[1] == "0" or pytesseract.image_to_string(img)[1] == "O"): return False
     return True
 
@@ -79,20 +79,54 @@ def find_fishy():
     if(coords != None): return coords
     coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/fish2.png', confidence = 0.35)
     if(coords != None): return coords
-    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/fish3.png', confidence = 0.25)
+    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/fish3.png', confidence = 0.45)
     if(coords != None): return coords
     return Exception
 
+def login():
+    coords_worldswitch = (613,501)
+    rcoords_worldswitch = randcoords(coords_worldswitch)
+    pyautogui.moveTo(rcoords_worldswitch[0],rcoords_worldswitch[1],0.5)
+    time.sleep(randrange(0,5)/10)
+    pyautogui.click()
+    pyautogui.moveTo(944,506,0.5)
+    time.sleep(randrange(0,5)/10)
+    pyautogui.click()
+    coords_existinguser = (1015,315)
+    rcoords_existinguser = randcoords(coords_existinguser)
+    pyautogui.moveTo(rcoords_existinguser[0],rcoords_existinguser[1],0.5)
+    time.sleep(randrange(0,5)/10)
+    pyautogui.click()
+    password = "PsnmO91lgILDpqChvwee"
+    pyautogui.typewrite(password)
+    time.sleep(randrange(0,5)/10)
+    pyautogui.moveTo(860,342)
+    time.sleep(randrange(0,20)/10)
+    pyautogui.click()
+    time.sleep(12)
+    coords_start = (955,357)
+    rcoords_start = randcoords(coords_start)
+    pyautogui.moveTo(rcoords_start[0],rcoords_start[1],0.5)
+    time.sleep(1)
+    pyautogui.click()
+
+
+#login()
+start_time = time.time()
+time.sleep(10)
 while(1):
     time.sleep(0.5)
-    if (inventory_count() > 24):
-        clear_inv(5,24)
+    if (time.time() - start_time > (40*60)):
+        quit()
+    if (inventory_count() > 26):
+        print("inventory has ", inventory_count(), " items in it")
+        clear_inv(5,inventory_count() - 1)
     if (is_fishing() == False):
         try: 
             coords = find_fishy()
-            pyautogui.moveTo(coords[0]+20,coords[1]+20, 0.15)
+            pyautogui.moveTo(coords[0]+20,coords[1]+30, 0.15)
             pyautogui.click()
-            time.sleep(15)
+            time.sleep(25)
         except:
             print("couldn't find fish")
             time.sleep(2)
