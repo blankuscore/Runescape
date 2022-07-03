@@ -111,7 +111,7 @@ def login():
     pyautogui.click()
 
 
-#login()
+login()
 start_time = time.time()
 time.sleep(10)
 while(1):
