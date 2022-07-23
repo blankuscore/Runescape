@@ -14,12 +14,12 @@ email: wehay77196@tagbert.com
 password: PsnmO91lgILDpqChvwee
 
 ## Explanation of various folders
-Character_Creation - randomizes and creates a character using a list of names and randomized features.  Timed to tick timing of osrs
-Emerald_Rings - crafting rings (emerald) using furnace in Edgeville
-Skilling - 
-    Fishing - fishing for shrimp at south of lumbridge, salmon/trout at barbarian village, lobster at Karamja
-    Mining - mining iron ore at mine north of Al Khazir
-    chopping.py - chopping trees [INCOMPLETE]
+- Character_Creation - randomizes and creates a character using a list of names and randomized features.  Timed to tick timing of osrs
+- Emerald_Rings - crafting rings (emerald) using furnace in Edgeville
+- Skilling - 
+    - Fishing - fishing for shrimp at south of lumbridge, salmon/trout at barbarian village, lobster at Karamja
+    - Mining - mining iron ore at mine north of Al Khazir
+    - chopping.py - chopping trees [INCOMPLETE]
 
 ## License & copyright
 None required or utilized
