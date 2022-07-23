@@ -36,12 +36,6 @@ def randcoords(coords_in): # randomize click locations
     coords_out[1] = coords_in[1] + randrange(-5,5,1)
     return tuple(coords_out)  
 
-def inv_open():
-    runewindow.activate()
-    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/inventory.png') #check if inventory is open or not
-    if (coords != None): 
-        time.sleep(0.05); pyautogui.moveTo(coords[0], coords[1], 0.15)
-        pyautogui.click()
 
 def inventory_count(): # determine how many items are in the inventory
     pyautogui.screenshot('inventory.jpg',region=(1687,746,(1878-1688),(1007-746)))
@@ -58,7 +52,6 @@ def inventory_count(): # determine how many items are in the inventory
 
 def clear_inv(start,end): # clear a set of inventory items
     runewindow.activate()
-    inv_open()
     if(end > 28): return Exception
     with pyautogui.hold('shift'):
         for i in range(start-1,end+1):
@@ -67,66 +60,71 @@ def clear_inv(start,end): # clear a set of inventory items
             time.sleep(0.05); pyautogui.moveTo(rcoords[0], rcoords[1], 0.125)
             time.sleep(0.05); pyautogui.click(rcoords[0], rcoords[1]) 
 
-def is_fishing():
-    pyautogui.screenshot('fishingstatus.png',region=(30,45,80,25))
+def is_fishing():  # update this function to check for color and not for text
+    pyautogui.screenshot('fishingstatus.png',region=(30,45,80,20))
     img = Image.open('fishingstatus.png')
     #print(pytesseract.image_to_string(img))
-    if(pytesseract.image_to_string(img)[0:2] == "NO" or pytesseract.image_to_string(img)[0:2] == "" or pytesseract.image_to_string(img)[1] == "0" or pytesseract.image_to_string(img)[1] == "O"): return False
+    #img.show()
+    if(pytesseract.image_to_string(img)[0:2] == "NO" or pytesseract.image_to_string(img)[0:2] == "" or pytesseract.image_to_string(img)[1] == "0" or pytesseract.image_to_string(img)[1] == "O" or pytesseract.image_to_string(img)[0:2] == "No"): return False
     return True
 
-def find_fishy():
-    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/fish1.png', confidence = 0.35)
+def is_lobster():
+    pyautogui.screenshot('fishingstatus.png',region=(0,21,140,25))
+    img = Image.open('fishingstatus.png')
+    print(pytesseract.image_to_string(img))
+    if(pytesseract.image_to_string(img)[0:4] == "Cage"): return True
+    return False
+
+def is_inventory():
+    pyautogui.screenshot('inventory.jpg',region=(1687,746,(1878-1688),(1007-746)))
+    img = Image.open('inventory.jpg') # width: 191, height: 261
+    color = img.getpixel((40,40))
+    if(color[0] > 65 or color[0] < 58):
+        pyautogui.moveTo(randrange(1560,1580),randrange(1020,1040),0.15)
+        pyautogui.click()
+
+def find_lobstah():
+    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/lobster1.png', region=(500,200,1000,800), confidence = 0.55)
     if(coords != None): return coords
-    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/fish2.png', confidence = 0.35)
+    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/lobster2.png', region=(500,200,1000,800), confidence = 0.55)
     if(coords != None): return coords
-    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/fish3.png', confidence = 0.45)
+    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/lobster3.png', region=(500,200,1000,800), confidence = 0.55)
+    if(coords != None): return coords
+    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/lobster4.png', region=(500,200,1000,800), confidence = 0.55)
+    if(coords != None): return coords
+    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/lobster5.png', region=(500,200,1000,800), confidence = 0.55)
+    if(coords != None): return coords
+    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/lobster.png', region=(500,200,1000,800), confidence = 0.2)
     if(coords != None): return coords
     return Exception
 
-def login():
-    coords_worldswitch = (613,501)
-    rcoords_worldswitch = randcoords(coords_worldswitch)
-    pyautogui.moveTo(rcoords_worldswitch[0],rcoords_worldswitch[1],0.5)
-    time.sleep(randrange(0,5)/10)
-    pyautogui.click()
-    pyautogui.moveTo(944,506,0.5)
-    time.sleep(randrange(0,5)/10)
-    pyautogui.click()
-    coords_existinguser = (1015,315)
-    rcoords_existinguser = randcoords(coords_existinguser)
-    pyautogui.moveTo(rcoords_existinguser[0],rcoords_existinguser[1],0.5)
-    time.sleep(randrange(0,5)/10)
-    pyautogui.click()
-    password = "PsnmO91lgILDpqChvwee"
-    pyautogui.typewrite(password)
-    time.sleep(randrange(0,5)/10)
-    pyautogui.moveTo(860,342)
-    time.sleep(randrange(0,20)/10)
-    pyautogui.click()
-    time.sleep(12)
-    coords_start = (955,357)
-    rcoords_start = randcoords(coords_start)
-    pyautogui.moveTo(rcoords_start[0],rcoords_start[1],0.5)
-    time.sleep(1)
-    pyautogui.click()
-
-
-login()
+is_inventory() # check if the inventory is open or not
 start_time = time.time()
-time.sleep(10)
+#time.sleep(10)
+time_stop = randrange(105,135,1)
+print("Going fishin for ", time_stop, " minutes!")
 while(1):
     time.sleep(0.5)
-    if (time.time() - start_time > (40*60)):
+    if (time.time() - start_time > (time_stop*60)):
         quit()
     if (inventory_count() > 26):
         print("inventory has ", inventory_count(), " items in it")
-        clear_inv(5,inventory_count() - 1)
+        clear_inv(3,inventory_count())
     if (is_fishing() == False):
         try: 
-            coords = find_fishy()
-            pyautogui.moveTo(coords[0]+20,coords[1]+30, 0.15)
-            pyautogui.click()
-            time.sleep(25)
+            coords = find_lobstah()
+            pyautogui.moveTo(coords[0]+randrange(15,30),coords[1]+randrange(15,30), 0.15)
+            if(is_lobster()):
+                pyautogui.click()
+                time.sleep(25)
+            else:
+                pyautogui.moveTo(coords[0]+randrange(15,30),coords[1]+randrange(15,30), 0.15)
+                time.sleep(0.15)
+                if(is_lobster()):
+                    pyautogui.click()
+                    time.sleep(25)
+            time.sleep(0.5)
         except:
             print("couldn't find fish")
             time.sleep(2)
+            

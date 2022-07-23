@@ -93,8 +93,9 @@ def move_mouse_down(coords_in):
     return tuple(coords_out)
 
 def tree_search():
-    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/start.png', confidence = 0.45)
-    pyautogui.moveTo(coords[0],coords[1],0.25) # center of screen: 938 547
+    #coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/start.png', confidence = 0.45)
+    coords = (938,547)
+    pyautogui.moveTo(938,547,0.25) # center of screen: 938 547
     while(1):
         i = randrange(0,4,1)
         if (i == 0):
