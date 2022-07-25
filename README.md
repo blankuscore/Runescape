@@ -21,5 +21,9 @@ password: PsnmO91lgILDpqChvwee
     - Mining - mining iron ore at mine north of Al Khazir
     - chopping.py - chopping trees [INCOMPLETE]
 
+## Next steps:
+- Update Emerald_Rings for exception handling and crafting leveling from 1-60
+- Update woodcutting for better tree finding algorithm
+
 ## License & copyright
 None required or utilized
