@@ -2,6 +2,7 @@
 import numpy as np
 import numpy
 import cv2
+import pygetwindow as gw
 
 from pyautogui import *
 import pyautogui
@@ -17,6 +18,8 @@ from pytesseract import pytesseract
 from pytesseract import Output
 
 pytesseract.tesseract_cmd = 'C:/Program Files/Tesseract-OCR/tesseract.exe'
+
+runewindow = gw.getWindowsWithTitle('RuneLite')[0]
 
 def inventory_count(): # determine how many items are in the inventory
     pyautogui.screenshot('inventory.jpg',region=(1687,746,(1878-1688),(1007-746)))
@@ -93,6 +96,7 @@ def move_mouse_down(coords_in):
     return tuple(coords_out)
 
 def tree_search():
+    runewindow.activate()
     #coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/start.png', confidence = 0.45)
     coords = (938,547)
     pyautogui.moveTo(938,547,0.25) # center of screen: 938 547
