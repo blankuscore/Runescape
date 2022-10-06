@@ -10,12 +10,14 @@ Most code samples focus on starting skills,
 ---
 
 ## OSRS Login info:
-Banned
-![#f03c15]email: wehay77196@tagbert.com '#f03c15'
-![#f03c15]password: PsnmO91lgILDpqChvwee '#f03c15'
+```diff
+#Banned
+- email: wehay77196@tagbert.com 
+- password: PsnmO91lgILDpqChvwee 
 
-Active
+#Active
 
+```
 ## Explanation of various folders
 - Character_Creation - randomizes and creates a character using a list of names and randomized features.  Timed to tick timing of osrs
 - Emerald_Rings - crafting rings (emerald) using furnace in Edgeville
