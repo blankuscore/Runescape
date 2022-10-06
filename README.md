@@ -1,6 +1,6 @@
-# Runescape Botting Repository
+# Project Botscape
 
-**Version 0.1.4**
+**Version 0.1.5**
 
 The goal of this project is to build and design code in order to automate runescape accounts.
 Most code samples focus on starting skills, 
@@ -10,8 +10,11 @@ Most code samples focus on starting skills,
 ---
 
 ## OSRS Login info:
-email: wehay77196@tagbert.com
-password: PsnmO91lgILDpqChvwee
+Banned
+![#f03c15]email: wehay77196@tagbert.com '#f03c15'
+![#f03c15]password: PsnmO91lgILDpqChvwee '#f03c15'
+
+Active
 
 ## Explanation of various folders
 - Character_Creation - randomizes and creates a character using a list of names and randomized features.  Timed to tick timing of osrs
