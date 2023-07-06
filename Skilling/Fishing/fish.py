@@ -38,7 +38,7 @@ def randcoords(coords_in): # randomize click locations
 
 def inv_open():
     runewindow.activate()
-    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/inventory.png') #check if inventory is open or not
+    coords = pyautogui.locateOnScreen('./Skilling/Fishing/inventory.png') #check if inventory is open or not
     if (coords != None): 
         time.sleep(0.05); pyautogui.moveTo(coords[0], coords[1], 0.15)
         pyautogui.click()
@@ -77,23 +77,36 @@ def is_fishing():
 def is_fish():
     pyautogui.screenshot('fishingstatus.png',region=(0,21,140,25))
     img = Image.open('fishingstatus.png')
-    print(pytesseract.image_to_string(img))
-    if(pytesseract.image_to_string(img)[0:4] == "Lure"): return True
+    print(pytesseract.image_to_string(img)[0:2])
+    if(pytesseract.image_to_string(img)[0:2] == "Lu" or pytesseract.image_to_string(img)[0:2] == "Lo"): return True
     return False
 
-def is_fire():
+def is_cook():
     pyautogui.screenshot('fishingstatus.png',region=(0,21,140,25))
     img = Image.open('fishingstatus.png')
+    print(pytesseract.image_to_string(img)[0:4])
     #print(pytesseract.image_to_string(img))
     if(pytesseract.image_to_string(img)[0:4] == "Cook"): return True
     return False
 
 def find_fishy():
-    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/fish1.png', region=(500,200,800,800), confidence = 0.35)
+    coords = pyautogui.locateOnScreen('./Skilling/Fishing/fish1.png', region=(500,200,800,800), confidence = 0.35)
     if(coords != None): return coords
-    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/fish2.png', region=(500,200,800,800), confidence = 0.35)
+    coords = pyautogui.locateOnScreen('./Skilling/Fishing/fish2.png', region=(500,200,800,800), confidence = 0.35)
     if(coords != None): return coords
-    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/fish3.png', region=(500,200,800,800), confidence = 0.65)
+    coords = pyautogui.locateOnScreen('./Skilling/Fishing/fish3.png', region=(500,200,800,800), confidence = 0.65)
+    if(coords != None): return coords
+    return Exception
+
+def find_fire():
+    coords = pyautogui.locateOnScreen('./Skilling/Fishing/fire1.png', region=(500,200,800,800), confidence = 0.45)
+    print('fire1')
+    if(coords != None): return coords
+    coords = pyautogui.locateOnScreen('./Skilling/Fishing/fire2.png', region=(500,200,800,800), confidence = 0.415)
+    print('fire2')
+    if(coords != None): return coords
+    coords = pyautogui.locateOnScreen('./Skilling/Fishing/fire3.png', region=(500,200,800,800), confidence = 0.65) # need to update returned coords for subtracted values
+    print('fire3')
     if(coords != None): return coords
     return Exception
 
@@ -136,20 +149,41 @@ while(1):
         quit()
     if (inventory_count() > 26):
         print("inventory has ", inventory_count(), " items in it")
-        clear_inv(5,inventory_count() - 1)
+        try:
+            coords = find_fire()
+            print('found fire')
+            pyautogui.moveTo(coords[0]+randrange(5,10),coords[1]+randrange(5,10), 0.15)
+            if(is_cook()):
+                pyautogui.click()
+                time.sleep(randrange(10,27))
+                pyautogui.press('1')
+                time.sleep(randrange(30,45))  
+            else:
+                pyautogui.moveTo(coords[0]+randrange(5,10),coords[1]+randrange(5,10), 0.15)
+                time.sleep(0.15)
+                if(is_cook()):
+                    pyautogui.click()
+                    time.sleep(randrange(10,27))
+                pyautogui.press('1')
+                time.sleep(randrange(30,45))  
+            time.sleep(0.5)
+        except:
+            clear_inv(5,inventory_count() - 1)
+            break
+        clear_inv(5, inventory_count() - 1)        
     if (is_fishing() == False):
         try: 
             coords = find_fishy()
-            pyautogui.moveTo(coords[0]+15,coords[1]+15, 0.15)
+            pyautogui.moveTo(coords[0]+randrange(10,15),coords[1]+randrange(10,15), 0.15)
             if(is_fish()):
                 pyautogui.click()
-                time.sleep(25)
+                time.sleep(randrange(23,27))
             else:
-                pyautogui.moveTo(coords[0]+15,coords[1]+35, 0.15)
+                pyautogui.moveTo(coords[0]+randrange(10,15),coords[1]+randrange(30,35), 0.15)
                 time.sleep(0.15)
                 if(is_fish()):
                     pyautogui.click()
-                    time.sleep(25)
+                    time.sleep(randrange(23,27))
             time.sleep(0.5)
         except:
             print("couldn't find fish")

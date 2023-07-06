@@ -84,6 +84,26 @@ def deposit_pieshells():
     else: raise
     time.sleep(1)
 
+def deposit_pastry():
+    coords = pyautogui.locateOnScreen('Money_Making\Pie Shells\pastrydough.png', confidence = 0.75)
+    print(coords == None)
+    if(coords == None):
+        raise
+    coords = randcoords(coords)
+    pyautogui.moveTo(coords[0]+10, coords[1]+10, randrange(5,10)/10)
+    pyautogui.click()
+    time.sleep(1)
+
+def deposit_piedish():
+    coords = pyautogui.locateOnScreen('Money_Making\Pie Shells\piedish.png', confidence = 0.75)
+    print(coords == None)
+    if(coords == None):
+        raise
+    coords = randcoords(coords)
+    pyautogui.moveTo(coords[0]+10, coords[1]+10, randrange(5,10)/10)
+    pyautogui.click()
+    time.sleep(1)
+
 def retreive_dough_dish():    # finds dough, finds shells, withdraws both, closes bank
     print('finding dough')
     coords = pyautogui.locateOnScreen('Money_Making\Pie Shells\pastrydough.png', confidence = 0.85)
@@ -153,6 +173,13 @@ while 1:
     except:
         print("No pieshells to deposit")
         time.sleep(1)
+        coords = pyautogui.locateOnScreen('Money_Making\Pie Shells\pastrydough.png', confidence = 0.75)
+        if(coords[0] > 1000):
+            try:
+                deposit_pastry()
+                deposit_piedish()
+            except:
+                deposit_piedish()
     try:
         retreive_dough_dish() 
     except:

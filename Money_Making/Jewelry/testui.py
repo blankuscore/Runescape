@@ -24,7 +24,9 @@ while True:
     event, values = window.read()
     if event == "emerald_bracelet":
         print("emerald bracelet")
+        window.close()
     if event == "emerald_necklace":
         print("emerald pearl necklace")
 
-    
+    if event == sg.WIN_CLOSED or event == 'Cancel': # if user closes window or clicks cancel
+        break

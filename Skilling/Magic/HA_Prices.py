@@ -1,9 +1,16 @@
-import string
-import selenium
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
+
+
 from tabulate import tabulate
 import numpy as np
+
+options = Options()
+options.add_experimental_option("excludeSwitches", ["enable-logging"])
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options) # Make sure chromedriver.exe is in path variable
 
 # List of items:
 #
@@ -26,12 +33,12 @@ import numpy as np
 
 def get_price(id):
     price_page = "https://prices.runescape.wiki/osrs/item/" + str(id)
-    browser.get(price_page)
-    price_retrieve = browser.find_element_by_class_name('wgl-item-price')
+    driver.get(price_page)
+    price_retrieve = driver.find_element_by_class_name('wgl-item-price')
     price = price_retrieve.text
-    name_retrieve = browser.find_element_by_tag_name('h3')
+    name_retrieve = driver.find_element_by_tag_name('h3')
     name = name_retrieve.text
-    high_alch = browser.find_element_by_class_name('wgl-item-details-table')
+    high_alch = driver.find_element_by_class_name('wgl-item-details-table')
     highalch = high_alch.text
     return price, name, highalch
 
@@ -50,9 +57,6 @@ def parse_price(pa):
         if(pa[k] == "c"):
             pa_return = float(pa[0:(k-1)].replace(',',''))
             return pa_return
-
-PATH = r"C:\Users\GregM\Documents\VSCode\Python\Runescape\chromedriver.exe"
-browser = webdriver.Chrome(PATH)
 
 A = np.array(["Name", "Cost", "High Alchemy", "Profit"])
 id_numbers = np.array([1121,1123,1432,1147,1333,1303,1163,1373,1113,1201,1319,1079,1093,1127,3202,12484,2503,4087,7158,4585,1305, 3204, 1215, 1377,1347,2499,2501])

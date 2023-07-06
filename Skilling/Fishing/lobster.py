@@ -84,21 +84,22 @@ def is_inventory():
         pyautogui.click()
 
 def find_lobstah():
-    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/lobster1.png', region=(500,200,1000,800), confidence = 0.55)
+    coords = pyautogui.locateOnScreen('Skilling\Fishing\lobster1.png', region=(200,200,1000,800), confidence = 0.45)
     if(coords != None): return coords
-    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/lobster2.png', region=(500,200,1000,800), confidence = 0.55)
+    coords = pyautogui.locateOnScreen('Skilling\Fishing\lobster2.png', region=(500,200,1000,800), confidence = 0.45)
     if(coords != None): return coords
-    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/lobster3.png', region=(500,200,1000,800), confidence = 0.55)
+    coords = pyautogui.locateOnScreen('Skilling\Fishing\lobster3.png', region=(500,200,1000,800), confidence = 0.45)
     if(coords != None): return coords
-    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/lobster4.png', region=(500,200,1000,800), confidence = 0.55)
+    coords = pyautogui.locateOnScreen('Skilling\Fishing\lobster4.png', region=(500,200,1000,800), confidence = 0.45)
     if(coords != None): return coords
-    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/lobster5.png', region=(500,200,1000,800), confidence = 0.55)
+    coords = pyautogui.locateOnScreen('Skilling\Fishing\lobster5.png', region=(500,200,1000,800), confidence = 0.45)
     if(coords != None): return coords
-    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/lobster.png', region=(500,200,1000,800), confidence = 0.2)
+    coords = pyautogui.locateOnScreen('Skilling\Fishing\lobster.png', region=(500,200,1000,800), confidence = 0.2)
     if(coords != None): return coords
     return Exception
 
-is_inventory() # check if the inventory is open or not
+
+#is_inventory() # check if the inventory is open or not
 start_time = time.time()
 #time.sleep(10)
 time_stop = randrange(105,135,1)

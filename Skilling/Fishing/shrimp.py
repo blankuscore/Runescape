@@ -72,50 +72,51 @@ def randcoords(coords_in): # randomize click locations
 
 def inv_open():
     runewindow.activate()
-    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Runescape/Skilling/inventory.png') #check if inventory is open or not
+    coords = pyautogui.locateOnScreen('./Skilling/Fishing/inventory.png') #check if inventory is open or not
     if (coords != None): 
         time.sleep(0.05); pyautogui.moveTo(coords[0], coords[1], 0.15)
-        pyautogui.click()
+        pyautogui.click(duration=randrange(25,40)/1000)
 
 def clear_inv(start,end): # clear a set of inventory items
     runewindow.activate()
-    inv_open()
     if(end > 28): return Exception
     with pyautogui.hold('shift'):
         for i in range(start-1,end+1):
             coords = inv[i]
             rcoords = randcoords(coords); time.sleep(0.05)
             time.sleep(0.05); pyautogui.moveTo(rcoords[0], rcoords[1], 0.125)
-            time.sleep(0.05); pyautogui.click(rcoords[0], rcoords[1])  
+            time.sleep(0.05); pyautogui.click(rcoords[0], rcoords[1]) 
 
 def findshrimp():
-    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/shrimp.png', confidence = 0.85)
+    coords = pyautogui.locateOnScreen('./Skilling/Fishing/shrimp.png', confidence = 0.85)
     if(coords != None): return coords
-    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/shrimp2.png', confidence = 0.85)
+    coords = pyautogui.locateOnScreen('./Skilling/Fishing/shrimp2.png', confidence = 0.85)
     if(coords != None): return coords
-    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/shrimp2.png', confidence = 0.45)
+    coords = pyautogui.locateOnScreen('./Skilling/Fishing/shrimp2.png', confidence = 0.45)
     if(coords != None): return coords
 
 def use_net():
     runewindow.activate()
-    coords = pyautogui.locateOnScreen('C:/Users/GregM/Documents/VSCode/Python/Runescape/Skilling/Fishnet.png',confidence = 0.95)
+    coords = pyautogui.locateOnScreen('./Skilling/Fishing/Fishnet.png',confidence = 0.95)
     pyautogui.moveTo(coords[0],coords[1],0.15)
     time.sleep(0.25)
-    pyautogui.click()
+    pyautogui.click(duration=randrange(25,40)/1000)
 
 def is_fishing():
-    pyautogui.screenshot('fishingstatus.png',region=(30,45,80,25))
+    pyautogui.screenshot('fishingstatus.png',region=(30,45,80,20))
     img = Image.open('fishingstatus.png')
-    if(pytesseract.image_to_string(img)[0:2] == "NO" or pytesseract.image_to_string(img)[0:2] == ""): return False
+    #print(pytesseract.image_to_string(img)[0:2])
+    #img.show()
+    if(pytesseract.image_to_string(img)[0:2] == "NO" or pytesseract.image_to_string(img)[0:2] == "" or pytesseract.image_to_string(img)[0:2] == "No"): return False
     return True
+
 
 while(1):
     time.sleep(0.5)
     if (inventory_count() > 24):
-        #clear_inv(2,24)
-        break
+        clear_inv(2,24)
     if (is_fishing() == False):
         coords = findshrimp()
         pyautogui.moveTo(coords[0]+20,coords[1]+20, 0.15)
-        pyautogui.click()
+        pyautogui.click(duration=randrange(25,40)/1000)
         time.sleep(8)  
